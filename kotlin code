@@ -1,0 +1,56 @@
+import java.util.Scanner
+
+fun main() {
+    val scanner = Scanner(System.in)
+
+    // Display available travel plans
+    println("Welcome to our Travel Ticket Booking App!")
+    println("Choose a Travel Plan:")
+    println("1. Plan A: Beach Vacation - 7 Days")
+    println("2. Plan B: Mountain Trek - 5 Days")
+    println("3. Plan C: City Tour - 3 Days")
+    print("Enter the number of the plan you want to choose (1/2/3): ")
+    val planChoice = scanner.nextInt()
+
+    // Input validation for plan choice
+    if (planChoice !in 1..3) {
+        println("Invalid choice! Exiting...")
+        return
+    }
+
+    // Proceed to ticket booking page
+    print("How many people are you booking tickets for? ")
+    val numberOfPeople = scanner.nextInt()
+    scanner.nextLine()  // Consume newline left-over from nextInt()
+
+    // Collect personal details (name, age, gender) for each person
+    val names = Array(numberOfPeople) { "" }
+    val ages = IntArray(numberOfPeople)
+    val genders = Array(numberOfPeople) { "" }
+
+    for (i in 0 until numberOfPeople) {
+        print("Enter name of person ${i + 1}: ")
+        names[i] = scanner.nextLine()
+        print("Enter age of ${names[i]}: ")
+        ages[i] = scanner.nextInt()
+        scanner.nextLine()  // Consume newline left-over
+        print("Enter gender of ${names[i]} (Male/Female/Other): ")
+        genders[i] = scanner.nextLine()
+    }
+
+    // Proceed to payment page
+    val totalCost = numberOfPeople * 1350
+    println("\n--- Payment Page ---")
+    println("Total number of tickets: $numberOfPeople")
+    println("Total cost: $totalCost INR")
+    print("Click submit to confirm your booking (Y/N): ")
+    val submit = scanner.nextLine()
+
+    if (submit.equals("Y", ignoreCase = true)) {
+        println("\nThanks for booking a trip with us!")
+    } else {
+        println("Booking has been canceled.")
+    }
+
+    scanner.close()
+}
